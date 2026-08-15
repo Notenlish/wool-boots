@@ -1,4 +1,10 @@
-# Stonecutter Mod Template
+# Wool Boots
+
+## TODO
+- [X] Don't make noise when falling on ground
+- [] Dont make noise when moving
+- [] Texture
+- [] Colored Boots
 
 A multi-platform Minecraft mod template for **Fabric**, **NeoForge**, and **Forge**,
 using [Stonecutter](https://stonecutter.kikugie.dev/) for
