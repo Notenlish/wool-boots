@@ -1,6 +1,6 @@
-package com.example.modtemplate.event;
+package notenlish.woolboots.event;
 
-import com.example.modtemplate.ModTemplate;
+import notenlish.woolboots.ModTemplate;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Objects;

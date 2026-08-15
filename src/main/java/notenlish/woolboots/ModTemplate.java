@@ -1,17 +1,17 @@
-package com.example.modtemplate;
+package notenlish.woolboots;
 
-import com.example.modtemplate.platform.Platform;
+import notenlish.woolboots.platform.Platform;
 
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 //? fabric {
-import com.example.modtemplate.platform.fabric.FabricPlatform;
+import notenlish.woolboots.platform.fabric.FabricPlatform;
 //?} neoforge {
-/*import com.example.modtemplate.platform.neoforge.NeoforgePlatform;
+/*import notenlish.woolboots.platform.neoforge.NeoforgePlatform;
  *///?} forge {
-/*import com.example.modtemplate.platform.forge.ForgePlatform;
+/*import notenlish.woolboots.platform.forge.ForgePlatform;
  *///?}
 
 @SuppressWarnings("LoggingSimilarMessage")

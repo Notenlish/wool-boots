@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.fabric;
+package notenlish.woolboots.platform.fabric;
 
 //? fabric {
 
-import com.example.modtemplate.ModTemplate;
+import notenlish.woolboots.ModTemplate;
 import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
 import net.fabricmc.api.ModInitializer;
 

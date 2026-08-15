@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.forge;
+package notenlish.woolboots.platform.forge;
 
 //? forge {
 
-/*import com.example.modtemplate.platform.Platform;
+/*import notenlish.woolboots.platform.Platform;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 

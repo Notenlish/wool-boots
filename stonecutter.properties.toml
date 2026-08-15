@@ -1,29 +1,26 @@
 loomx.loom_version="1.16-SNAPSHOT"
 
-mod.id = "modtemplate"
-mod.name = "Mod Template"
-mod.group = "com.example"
+
+mod.id = "woolboots"
+mod.name = "Wool Boots"
+mod.group = "notenlish"
 mod.version = "0.1.0"
-mod.channel_tag = "-alpha.2"
-mod.description = "Example Description"
-mod.authors = ["AuthorName", "AnotherAuthorName"]
-mod.contributors = ["ContributorName", "AnotherContributorName"]
-mod.inception_year = "2025"
+mod.channel_tag = ""
+mod.description = "Stealthily move with wool boots"
+mod.authors = ["Notenlish"]
+mod.contributors = []
+mod.inception_year = "2026"
 mod.license.name = "MIT"
 mod.license.url = "https://opensource.org/licenses/MIT"
 mod.license.dist = "repo"
-mod.sources_url = "https://github.com/rotgruengelb/stonecutter-mod-template"
-mod.homepage_url = "https://github.com/rotgruengelb/stonecutter-mod-template"
-mod.issues_url = "https://github.com/rotgruengelb/stonecutter-mod-template/issues"
-mod.discord_url = "https://discord.gg/aunYJB4wz9"
-mod.environment = "both"   #"client", "server", "both"
+mod.sources_url = "https://github.com/Notenlish/wool-boots"
+mod.homepage_url = "https://github.com/Notenlish/wool-boots"
+mod.issues_url = "https://github.com/Notenlish/wool-boots/issues"
+mod.discord_url = ""
+mod.environment = "both"
 [[mod.pom.developers]]
-id = "authorname"
-name = "AuthorName"
-url = "https://github.com/ghost"
-[[mod.pom.developers]]
-id = "anotherauthorname"
-name = "AnotherAuthorName"
+id = "notenlish"
+name = "Notenlish"
 url = "https://github.com/ghost"
 
 [fabric]

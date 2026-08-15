@@ -1,6 +1,6 @@
-package com.example.modtemplate.mixin;
+package notenlish.woolboots.mixin;
 
-import com.example.modtemplate.ModTemplate;
+import notenlish.woolboots.ModTemplate;
 import dev.kikugie.fletching_table.annotation.MixinEnvironment;
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;

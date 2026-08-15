@@ -1,8 +1,8 @@
-package com.example.modtemplate.platform.fabric;
+package notenlish.woolboots.platform.fabric;
 
 //? fabric {
 
-import com.example.modtemplate.platform.Platform;
+import notenlish.woolboots.platform.Platform;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class FabricPlatform implements Platform {
