@@ -3,6 +3,7 @@
 ## TODO
 - [X] Don't make noise when falling on ground
 - [X] Dont make noise when moving with wool boots
+- [] still take damage if falling from like 6 blocks(and make noise)
 - [] Texture
 - [] Colored Boots
 
