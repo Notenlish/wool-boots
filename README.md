@@ -3,9 +3,9 @@
 ## TODO
 - [X] Don't make noise when falling on ground
 - [X] Dont make noise when moving with wool boots
-- [] still take damage if falling from like 6 blocks(and make noise)
+- [X] still take damage if falling from like 5.5 blocks(and make noise)
 - [] Texture
-- [] Colored Boots
+- [] Dyeable boots
 
 A multi-platform Minecraft mod template for **Fabric**, **NeoForge**, and **Forge**,
 using [Stonecutter](https://stonecutter.kikugie.dev/) for

@@ -2,15 +2,19 @@ package notenlish.woolboots.mixin;
 
 import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import dev.kikugie.fletching_table.annotation.MixinEnvironment;
 import net.minecraft.world.phys.Vec3;
 import notenlish.woolboots.ModItems;
+import notenlish.woolboots.ModTemplate;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,20 +45,30 @@ public abstract class ExampleMixin {
 		if (entity instanceof Player) {
 			Player p = (Player) entity;
 
-			/*
-			public abstract Iterable<ItemStack> getArmorSlots();
 
-    		public abstract ItemStack getItemBySlot(EquipmentSlot var1);
-			*/
+			//public abstract Iterable<ItemStack> getArmorSlots();
+    		//public abstract ItemStack getItemBySlot(EquipmentSlot var1);
+
 			Iterable<ItemStack> slots = p.getArmorSlots();
 			List<ItemStack> slotList = Lists.newArrayList(slots);
 			ItemStack boots_stack = p.getItemBySlot(EquipmentSlot.FEET);
 
-			Item i = boots_stack.getItem();
-			if(boots_stack.is(ModItems.WHITE_WOOL_BOOTS)) {
-				ci.cancel();
+			// ModTemplate.LOGGER.info(String.format("falldistance %.2f", entity.fallDistance));
+
+			// Item i = boots_stack.getItem();
+			if (p_19913_.is(Blocks.AIR)) {
+				// dont do anything
+			}
+			else if(boots_stack.is(ModItems.WHITE_WOOL_BOOTS)) {
+				boots_stack.hurtAndBreak(Math.round((float)(entity.fallDistance * 0.55)), p, EquipmentSlot.FEET);
+				if (entity.fallDistance <= 5.0F) {
+					entity.fallDistance = 0.0f;
+				} else { // take less damage if youre gonna take damage
+					entity.fallDistance *= 0.8; // roughly worse than feather falling 2
+				}
+
+				// ci.cancel();
 				// idk if required
-				entity.fallDistance = 0.0F;
 			}
 		}
 	}
