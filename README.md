@@ -2,7 +2,7 @@
 
 ## TODO
 - [X] Don't make noise when falling on ground
-- [] Dont make noise when moving
+- [X] Dont make noise when moving with wool boots
 - [] Texture
 - [] Colored Boots
 
