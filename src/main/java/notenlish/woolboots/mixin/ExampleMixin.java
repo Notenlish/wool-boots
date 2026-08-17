@@ -57,10 +57,13 @@ public abstract class ExampleMixin {
 
 			// Item i = boots_stack.getItem();
 			if (p_19913_.is(Blocks.AIR)) {
-				// dont do anything
+				// don't do anything
 			}
 			else if(boots_stack.is(ModItems.WHITE_WOOL_BOOTS)) {
-				boots_stack.hurtAndBreak(Math.round((float)(entity.fallDistance * 0.55)), p, EquipmentSlot.FEET);
+				if (entity.fallDistance >= 4.0F) {
+					// ModTemplate.LOGGER.info("BREAKING");
+					boots_stack.hurtAndBreak((int)Math.floor(entity.fallDistance * 0.45), p, EquipmentSlot.FEET);
+				}
 				if (entity.fallDistance <= 5.0F) {
 					entity.fallDistance = 0.0f;
 				} else { // take less damage if youre gonna take damage

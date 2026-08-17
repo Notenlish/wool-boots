@@ -62,6 +62,6 @@ public class ModArmorMaterials {
 			0.0f,
 			true
 			);
-	public static final int WOOLITE_DURABILITY_MULTIPLIER = 12;
+	public static final int WOOLITE_DURABILITY_MULTIPLIER = 13;
 
 }

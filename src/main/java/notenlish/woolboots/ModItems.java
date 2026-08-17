@@ -9,7 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.AdventureModePredicate;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.item.component.Unbreakable;
 
 public class ModItems {
@@ -36,13 +38,4 @@ public class ModItems {
 					ModArmorMaterials.WOOLITE,
 					ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(ModArmorMaterials.WOOLITE_DURABILITY_MULTIPLIER))
 			), "white_wool_boots");
-
-	public static final Item WHITE_WOOL_CHESTPLATE = register(
-			new ArmorItem(
-					ModArmorMaterials.WOOLITE,
-					ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(ModArmorMaterials.WOOLITE_DURABILITY_MULTIPLIER))
-			), "white_wool_chestplate");
-
-
-
 }
