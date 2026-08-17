@@ -38,7 +38,15 @@ public class ModArmorMaterials {
 				// We'll pass the dyeable boolean we received as the dyeable parameter.
 				new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(ModTemplate.MOD_ID, id), "", dyeable));
 
-		ArmorMaterial material = new ArmorMaterial(defensePoints, enchantability, equipSound, repairIngredientSupplier, layers, toughness, knockbackResistance);
+		ArmorMaterial material = new ArmorMaterial(
+				defensePoints,
+				enchantability,
+				equipSound,
+				repairIngredientSupplier,
+				layers,
+				toughness,
+				knockbackResistance
+		);
 		// Register the material within the ArmorMaterials registry.
 		material = Registry.register(BuiltInRegistries.ARMOR_MATERIAL, ResourceLocation.fromNamespaceAndPath(ModTemplate.MOD_ID, id), material);
 
@@ -62,6 +70,7 @@ public class ModArmorMaterials {
 			0.0f,
 			true
 			);
+
 	public static final int WOOLITE_DURABILITY_MULTIPLIER = 13;
 
 }

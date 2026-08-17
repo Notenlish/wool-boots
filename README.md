@@ -4,7 +4,15 @@
 - [X] Don't make noise when falling on ground
 - [X] Dont make noise when moving with wool boots
 - [X] still take damage if falling from like 5.5 blocks(and make noise)
-- [] Texture
+- [] Texture 
+
+ok so for texture look at leather texture overlay in /assets/minecraft/textures/item/leather_boots_overlay
+ and normal leather
+this is for like the sprite in the inventory
+
+for the actual armor model texture go look at assets\minecraft\textures\entity/equipment/humanoid and humanoid_leggings
+
+and get rid of those like 16 different tags for all the individually defined wool boots items, that is stupid only have 1 wool boot but allow them to be colored.
 - [] Dyeable boots
 
 A multi-platform Minecraft mod template for **Fabric**, **NeoForge**, and **Forge**,
