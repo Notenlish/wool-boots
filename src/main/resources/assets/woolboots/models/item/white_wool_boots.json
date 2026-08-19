@@ -1,5 +1,5 @@
 {
-  "parent": "item/generated",
+  "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "woolboots:item/white_wool_boots",
     "layer1": "woolboots:item/white_wool_boots_overlay"

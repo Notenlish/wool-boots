@@ -33,7 +33,23 @@ platform {
 	}
 }
 
+//sourceSets {
+//	create("client") {
+//		java.srcDir("src/client/java")
+//		resources.srcDir("src/client/resources")
+//	}
+//}
+
 loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		register(project.property("mod.id") as String) {
+			sourceSet(sourceSets["main"])
+			sourceSet(sourceSets["client"])
+		}
+	}
+
 	accessWidenerPath = rootProject.file("src/main/resources/aw/${sc.current.version}.accesswidener")
 	runs.named("client") {
 		client()
