@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "wool_boots",
+  "key": {
+    "w": "minecraft:white_wool"
+  },
+  "pattern": [
+    "w w",
+    "w w"
+  ],
+  "result": {
+    "count": 1,
+    "id": "wool-boots:wool_boots"
+  }
+}

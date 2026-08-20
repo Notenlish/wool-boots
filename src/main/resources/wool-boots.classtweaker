@@ -1,0 +1,6 @@
+classTweaker v1 named
+accessible field net/minecraft/world/entity/Entity firstTick Z
+accessible field net/minecraft/world/entity/Entity random Lnet/minecraft/util/RandomSource;
+
+# for LivingEntityMixin
+accessible method net/minecraft/world/entity/LivingEntity onEquipItem (Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)V

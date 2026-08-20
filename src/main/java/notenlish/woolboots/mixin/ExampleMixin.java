@@ -1,79 +1,99 @@
 package notenlish.woolboots.mixin;
 
-import com.google.common.collect.Lists;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import dev.kikugie.fletching_table.annotation.MixinEnvironment;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import notenlish.woolboots.ModItems;
-import notenlish.woolboots.ModTemplate;
+import notenlish.woolboots.WoolBoots;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.List;
+import java.util.Optional;
 
 @Mixin(Entity.class)
-@MixinEnvironment(type = MixinEnvironment.Env.MAIN)
 public abstract class ExampleMixin {
 
-	@Inject(
-			method = "checkFallDamage",
-			at = @At(value = "HEAD"),
-			cancellable = true
-	)
-	private void checkFallDamage(
-			double p_19911_,
-			boolean p_19912_,
-			BlockState p_19913_,
-			BlockPos p_19914_,
-			CallbackInfo ci
+	// use abstract if the shadowed thing is a method and you dont want to deal with the body
+	@Shadow
+	public abstract boolean isInWater();
+	@Shadow
+	private Vec3 position;
+	@Shadow
+	public abstract void resetFallDistance();
+	@Shadow
+	public Optional<BlockPos> mainSupportingBlockPos;
+	@Shadow
+	public double fallDistance;
+
+	@Shadow
+	public abstract Level level();
+
+
+	/**
+	 * @author Notenlish
+	 * @reason because I needed to
+	 */
+	@Overwrite
+	public void checkFallDamage(
+			double d,
+			boolean bl,
+			BlockState blockState,
+			BlockPos blockPos
 	) {
-		Entity entity = (Entity) (Object) this;
+		Entity self = (Entity) (Object) this;
 
-		if (entity instanceof Player) {
-			Player p = (Player) entity;
-
-
-			//public abstract Iterable<ItemStack> getArmorSlots();
-    		//public abstract ItemStack getItemBySlot(EquipmentSlot var1);
-
-			Iterable<ItemStack> slots = p.getArmorSlots();
-			List<ItemStack> slotList = Lists.newArrayList(slots);
+		if (self instanceof Player) {
+			Player p = (Player) self;
 			ItemStack boots_stack = p.getItemBySlot(EquipmentSlot.FEET);
-
-			// ModTemplate.LOGGER.info(String.format("falldistance %.2f", entity.fallDistance));
-
-			// Item i = boots_stack.getItem();
-			if (p_19913_.is(Blocks.AIR)) {
-				// don't do anything
-			}
-			else if(boots_stack.is(ModItems.WHITE_WOOL_BOOTS)) {
-				if (entity.fallDistance >= 4.0F) {
-					// ModTemplate.LOGGER.info("BREAKING");
-					boots_stack.hurtAndBreak((int)Math.floor(entity.fallDistance * 0.45), p, EquipmentSlot.FEET);
+			if(!blockState.is(Blocks.AIR) && boots_stack.is(ModItems.WOOL_BOOTS)) {
+				if (self.fallDistance >= 4.0F) {
+					boots_stack.hurtAndBreak((int)Math.floor(self.fallDistance * 0.45), p, EquipmentSlot.FEET);
 				}
-				if (entity.fallDistance <= 5.0F) {
-					entity.fallDistance = 0.0f;
-				} else { // take less damage if youre gonna take damage
-					entity.fallDistance *= 0.8; // roughly worse than feather falling 2
+				if (self.fallDistance <= 5.0F) {
+					self.fallDistance = 0.0f;
+				} else { // take less damage if you're gonna take damage
+					self.fallDistance *= 0.8; // a bit worse than feather falling 2
 				}
 
-				// ci.cancel();
-				// idk if required
+				return;
 			}
 		}
+
+		// vanilla logic
+		if (!this.isInWater() && d < 0.0) {
+			this.fallDistance -= (float)d;
+		}
+
+		if (bl) {
+			if (this.fallDistance > 0.0) {
+				blockState.getBlock().fallOn(this.level(), blockState, blockPos, self, this.fallDistance);
+				this.level()
+						.gameEvent(
+								GameEvent.HIT_GROUND,
+								this.position,
+								GameEvent.Context.of(
+										self,
+										this.mainSupportingBlockPos
+												.<BlockState>map(blockPosx -> this.level().getBlockState(blockPosx))
+												.orElse(blockState))
+						);
+			}
+
+			this.resetFallDistance();
+		}
+
 	}
 
 	@Inject(
@@ -83,15 +103,38 @@ public abstract class ExampleMixin {
 	)
 	private void vibrationAndSoundEffectsFromBlock(BlockPos blockPos, BlockState blockState, boolean bl, boolean bl2, Vec3 vec3, CallbackInfoReturnable<Boolean> cir) {
 		if ((Object) this instanceof Player player) {
-			Iterable<ItemStack> slots = player.getArmorSlots();
-			List<ItemStack> slotList = Lists.newArrayList(slots);
 			ItemStack boots_stack = player.getItemBySlot(EquipmentSlot.FEET);
-			if (boots_stack.is(ModItems.WHITE_WOOL_BOOTS)) {
+			if (boots_stack.is(ModItems.WOOL_BOOTS)) {
 				// Cancel the step event by returning false
 				cir.setReturnValue(false);
 			}
 		}
 	}
+
+	// ah yes lets add another mixin, surely this will fix it
+//	@Inject(method = "gameEvent", at = @At("HEAD"), cancellable = true)
+//	private void mixinGameEvent(
+//			Holder<GameEvent> eventHolder,
+//			Entity entity,
+//			CallbackInfo ci
+//	) {
+//
+//		WoolBoots.LOGGER.info("gameEvent entity: {}", entity);
+//		WoolBoots.LOGGER.info("entity class: {}", entity.getClass().getName());
+//		WoolBoots.LOGGER.info("Avatar assignable: {}", Avatar.class.isAssignableFrom(entity.getClass()));
+//
+//		if (entity instanceof Avatar) {
+//			WoolBoots.LOGGER.info("AVATAR!");
+//		}
+//
+//		if (entity instanceof LivingEntity) {
+//			WoolBoots.LOGGER.info("LIVING ENTITY!");
+//		}
+//
+//		if (entity instanceof Player) {
+//			WoolBoots.LOGGER.info("PLAYER!");
+//		}
+//	}
 
 }
 

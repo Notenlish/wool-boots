@@ -1,7 +1,8 @@
 package notenlish.woolboots;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
@@ -12,6 +13,6 @@ public class ModTags {
 	}
 
 	private static TagKey<Item> bind(String string) {
-		return TagKey.create(Registries.ITEM, ResourceLocation.withDefaultNamespace(string));
+		return TagKey.create(Registries.ITEM, Identifier.withDefaultNamespace(string));
 	}
 }
